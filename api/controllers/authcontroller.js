@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const db = require('../db');
 
 const register = async (req, res) => {
-  const { email, senha } = req.body;
+  const { email, senha, } = req.body;
 
   if (!email || !senha) {
     return res.status(400).json({ erro: 'Email e senha são obrigatórios' });
@@ -28,7 +28,38 @@ const register = async (req, res) => {
   });
 };
 
-module.exports = { register };
+
+
+const login = (req, res) => {
+  const {email, senha} = req.body;
+
+  if(!email || !senha) {
+    return res.status(400).json({erro: 'Email e senha obrigatórios'});
+  }
+
+  db.query('SELECT * FROM usuarios WHERE email = ?', [email], async (err, results) => {
+    if (err)return res.status(500).json({erro: 'Erro no banco'});
+
+    if(results.length === 0) {
+      return res.status(401).json({erro: 'Usuário não encontrado'});
+    }
+
+    const usuario = results[0];
+    const senhaValida = await bcrypt.compare(senha, usuario.senha_hash);
+
+    if(!senhaValida) {
+      return res.status(401).json ({ erro: 'Senha incorreta'});
+    }
+
+    res.status(200).json({ mensagem: 'Login bem-sucedido', usuario:{ id: usuario.id, email: usuario.email}});
+    
+  })
+};
+
+module.exports = { register, login };
+
+
+
 
 
 //Verifica se o email e senha foram enviados

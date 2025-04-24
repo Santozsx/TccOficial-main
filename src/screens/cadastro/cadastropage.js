@@ -32,10 +32,19 @@ export default function cadastro() {
       return;
     }
 
+    if(senha.length < 6) {
+      Alert.alert('Erro', 'A senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('Erro', 'Digite um Email válido.');
+      return;
+    }
+
     try {
       const response = await axios.post(`${API_URL}/auth/register`, {
-        nome,
-        sobrenome,
         email,
         senha
       });
@@ -46,6 +55,7 @@ export default function cadastro() {
       console.error(error);
       Alert.alert('Erro', 'Erro ao cadastrar. Tente novamente.');
     }
+    
   };
 
   return (
