@@ -45,6 +45,8 @@ export default function cadastro() {
 
     try {
       const response = await axios.post(`${API_URL}/auth/register`, {
+        nome,
+        sobrenome,
         email,
         senha
       });
@@ -52,7 +54,7 @@ export default function cadastro() {
       Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!');
       navigation.navigate('Login');
     } catch (error) {
-      console.error(error);
+      console.log(error);
       Alert.alert('Erro', 'Erro ao cadastrar. Tente novamente.');
     }
     

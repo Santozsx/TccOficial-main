@@ -9,8 +9,14 @@ export default function Vestibular (){
     
     const navigation = useNavigation();
 
+     function navegaEnem2(){
+        navigation.navigate('enem2')
+    }
+
     
     return(
+
+
         <View style={styles.container}>
             <LinearGradient
                 locations={[0.1, 0.7]}
@@ -35,7 +41,7 @@ export default function Vestibular (){
             </LinearGradient>
 
             <ScrollView>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={navegaEnem2}>
                     <Text style={styles.Textbutton}>
                         Enem
                     </Text>

@@ -32,13 +32,15 @@ import NavegaLean_Six_Sigma from "./screens/Certificados/Qualidade e Processos/L
 import NavegaLEED from "./screens/Certificados/Sustentabilidade/LEED/LEED";
 import NavegaFSC from "./screens/Certificados/Sustentabilidade/Certificado_FSC/Certificado_FSC";
 import NavegaNR10 from "./screens/Certificados/Saúde e Segurança/NR_10/NR_10";
-import NavegaNR12  from "./screens/Certificados/Saúde e Segurança/NR_12/NR_12";
+import NavegaNR12 from "./screens/Certificados/Saúde e Segurança/NR_12/NR_12";
 import NavegaNR35 from "./screens/Certificados/Saúde e Segurança/NR_35/NR_35";
 import NavegaBLS_ACLS from "./screens/Certificados/Saúde e Segurança/BLS_ACLS/BLS_ACLS";
 import NavegaCPA10 from "./screens/Certificados/GestaoNegocios/CPA_10/CPA_10";
 import NavegaCPA20 from "./screens/Certificados/GestaoNegocios/CPA_20/CPA_20";
 import NavegaCFP from "./screens/Certificados/GestaoNegocios/CFP/CFP";
 import NavegaPMP from "./screens/Certificados/GestaoNegocios/PMP/PMP";
+import navegaEnem2 from "./screens/Vestibular/enem/enem";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -192,66 +194,71 @@ export default function StackRoutes() {
         component={NavegaISO_9001}
         options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name='ISO_14001'
         component={NavegaISO_14001}
         options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name='Lean_Six_Sigma'
         component={NavegaLean_Six_Sigma}
         options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name='LEED'
         component={NavegaLEED}
         options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name='FSC'
         component={NavegaFSC}
         options={{ headerShown: false }} />
 
-        <Stack.Screen 
+      <Stack.Screen
         name='NR10'
         component={NavegaNR10}
-        options={{headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen 
+      <Stack.Screen
         name="NR12"
         component={NavegaNR12}
-        options={{headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name='NR35'
         component={NavegaNR35}
-        options={{headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen 
+      <Stack.Screen
         name="BLS_ACLS"
         component={NavegaBLS_ACLS}
-        options={{ headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen 
-        name='CPA10' 
+      <Stack.Screen
+        name='CPA10'
         component={NavegaCPA10}
-        options={{ headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name="PMP"
         component={NavegaPMP}
-        options={{ headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name="CPA20"
         component={NavegaCPA20}
-        options={{ headerShown: false}}/>
+        options={{ headerShown: false }} />
 
-        <Stack.Screen
+      <Stack.Screen
         name="CFP"
         component={NavegaCFP}
-        options={{ headerShown: false}}/>
-        
+        options={{ headerShown: false }} />
+
+      <Stack.Screen
+        name="enem2"
+        component={navegaEnem2}
+        options={{ headerShown: false }} />
+
 
 
 

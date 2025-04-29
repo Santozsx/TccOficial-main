@@ -22,7 +22,7 @@ export default function Login() {
    }
 
 
-
+   const [nome, setNome] = useState('');
    const [email, setEmail] = useState('');
    const [senha, setSenha] = useState('');
    const [mensagem, setMensagem] = useState('');
@@ -30,6 +30,7 @@ export default function Login() {
    const handleLogin = async () => {
       try {
          const response = await axios.post(`${API_URL}/auth/login`, {
+            nome,
             email,
             senha
          });
@@ -64,7 +65,12 @@ export default function Login() {
 
          <View style={styles.container}>
 
-            <TextInput style={styles.input}/>
+            <TextInput style={styles.input}
+            placeholder='Nome'
+            value={nome}
+            onChangeText={setNome}
+            autoCapitalize='none'
+            />
             <Icon style={styles.iconuser} name='user' size={25} color='#fff' />
 
             <TextInput style={styles.input} 
