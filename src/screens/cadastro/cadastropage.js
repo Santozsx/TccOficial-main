@@ -58,6 +58,8 @@ export default function cadastro() {
       Alert.alert('Erro', 'Erro ao cadastrar. Tente novamente.');
     }
     
+
+
   };
 
   return (
@@ -115,5 +117,7 @@ export default function cadastro() {
         <Text style={styles.Text}>Cadastrar</Text>
       </TouchableOpacity>
     </LinearGradient>
+
+    
   );
 }

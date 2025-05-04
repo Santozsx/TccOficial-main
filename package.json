@@ -27,6 +27,8 @@
     "expo-status-bar": "~2.0.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.0",
+    "pdf-parse": "^1.1.1",
+    "pip": "^0.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.5",
@@ -39,6 +41,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
+    "scandir": "^0.0.4",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
