@@ -22,3 +22,33 @@ select * from arquivos_pdf
 
 
 
+
+
+
+
+prova
+	id
+	categoria
+	ano
+    
+Questao
+	id
+	json (NVARCHAR MAX)
+	alternativaCorreta
+    idprova
+
+Simulado
+	id
+	data
+    prova
+    respostasCorretas
+     
+    
+
+
+	
+API que vai buscar os dados do banco de dados precisa ser criada em c# e ela deve ter
+1 - 
+  
+  
+  
