@@ -44,6 +44,9 @@
     "scandir": "^0.0.4",
     "yarn": "^1.22.22"
   },
+  "overrides": {
+    "minimist": "^1.2.8"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.3.12",
