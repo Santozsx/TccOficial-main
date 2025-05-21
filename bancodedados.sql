@@ -1,24 +1,31 @@
-CREATE DATABASE IF NOT EXISTS simuapp;
+CREATE DATABASE if not exists simuapp;
 USE simuapp;
 
-CREATE TABLE if not EXISTS usuarios(
+CREATE TABLE if not exists usuarios(
 id int AUTO_INCREMENT PRIMARY KEY,
-nome varchar (255) not null unique,
-sobrenome varchar (255) not null unique,
+nome VARCHAR(255) NOT NULL UNIQUE,
+sobrenome VARCHAR(255) NOT NULL UNIQUE,
 email VARCHAR(255) NOT NULL UNIQUE,
 senha_hash VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS arquivos_pdf (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(255),
-  caminho TEXT,
-  tipo ENUM('prova', 'gabarito') NOT NULL,
-  texto_extraido LONGTEXT,
-  data_upload DATETIME DEFAULT CURRENT_TIMESTAMP
+create table if not exists arquivos_pdf(
+id int auto_increment primary key,
+nome VARCHAR (255),
+caminho TEXT,
+texto_extraido LONGTEXT,
+data_upload DATETIME DEFAULT CURRENT_TIMESTAMP,
+tipo ENUM('prova', 'gabarito')
+
 );
 
-select * from arquivos_pdf
+insert into usuarios (id, nome, sobrenome, email, senha_hash) 
+values (1,' gabriel', 'rodrigues', 'gabriel@gmail.com', 123456);
+
+select * from arquivos_pdf;
+
+
+
 
 
 
