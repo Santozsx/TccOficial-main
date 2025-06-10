@@ -32,6 +32,10 @@ export default function Layout({ Title, children }) {
 
     const navigation = useNavigation();
 
+    const navegaforms = () => {
+        navigation.navigate('FormularioProva')
+    }
+
     const [SelectedOption, setSelectedOption] = useState("");
 
     return (
@@ -85,7 +89,7 @@ export default function Layout({ Title, children }) {
                     </View>
             </View>
 
-            <TouchableOpacity style={styles.buttonrealizar}>
+            <TouchableOpacity style={styles.buttonrealizar} onPress={navegaforms}>
                 <Text style={styles.textrealizar}>
                     Realizar Simulado
                 </Text>

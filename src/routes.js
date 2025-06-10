@@ -40,6 +40,7 @@ import NavegaCPA20 from "./screens/Certificados/GestaoNegocios/CPA_20/CPA_20";
 import NavegaCFP from "./screens/Certificados/GestaoNegocios/CFP/CFP";
 import NavegaPMP from "./screens/Certificados/GestaoNegocios/PMP/PMP";
 import navegaEnem2 from "./screens/Vestibular/enem/enem";
+import NavegaForm from "./screens/formularioprovas/FormularioProva";
 
 
 const Stack = createNativeStackNavigator();
@@ -257,6 +258,11 @@ export default function StackRoutes() {
       <Stack.Screen
         name="enem2"
         component={navegaEnem2}
+        options={{ headerShown: false }} />
+
+      <Stack.Screen
+        name="FormularioProva"
+        component={NavegaForm}
         options={{ headerShown: false }} />
 
 
