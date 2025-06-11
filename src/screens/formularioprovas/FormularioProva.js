@@ -1,60 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
-import axios from 'axios';
+import { RadioButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const API_URL = 'http://localhost:8080'; // Substitua pelo seu IP local
-
-const FormularioProva = ({ route }) => {
+export default function QuestoesScreen() {
   const [questoes, setQuestoes] = useState([]);
   const [respostas, setRespostas] = useState({});
-  const { ano = 2024, usuarioId = 1, nomeProva = 'ENEM 2024 - Azul' } = route.params || {};
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/questoes/${ano}`)
-      .then(response => setQuestoes(response.data))
-      .catch(error => {
-        console.error(error);
-        Alert.alert('Erro', 'Não foi possível carregar as questões.');
-      });
+    const fetchQuestoes = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/questoes?ano=2024'); // Use IP real no celular
+        const data = await response.json();
+        setQuestoes(data);
+      } catch (error) {
+        console.error('Erro ao buscar questões:', error);
+      }
+    };
+
+    fetchQuestoes();
   }, []);
 
-  const selecionarResposta = (questaoId, letra) => {
-    setRespostas({ ...respostas, [questaoId]: letra });
+  const selecionarResposta = (id, alternativa) => {
+    setRespostas(prev => ({ ...prev, [id]: alternativa }));
   };
 
   const enviarRespostas = () => {
-    axios.post(`${API_URL}/api/respostas`, {
-      usuarioId,
-      ano,
-      nomeProva,
-      respostas
-    })
-    .then(() => {
-      Alert.alert('Sucesso', 'Respostas enviadas com sucesso!');
-    })
-    .catch(error => {
-      console.error(error);
-      Alert.alert('Erro', 'Falha ao enviar respostas.');
-    });
+    Alert.alert('Respostas selecionadas', JSON.stringify(respostas, null, 2));
+    // Aqui você pode adicionar lógica para enviar ao servidor
   };
 
-  const renderAlternativas = (questao) => {
-    return questao.alternativas.map(alt => (
-      <TouchableOpacity
-        key={`${questao.id}-${alt.letra}`} // <-- key única corrigida aqui
-        style={[
-          styles.radioOption,
-          respostas[questao.id] === alt.letra && styles.radioSelected
-        ]}
-        onPress={() => selecionarResposta(questao.id, alt.letra)}
-      >
-        <Text style={styles.alternativaTexto}>
-          {alt.letra}) {alt.texto}
-        </Text>
-      </TouchableOpacity>
-    ));
-  };
+  const renderAlternativas = (item) =>
+    item.alternativas.map((alt, index) => {
+      const letra = alt.slice(0, 1);
+      const texto = alt.slice(3);
+      const selecionada = respostas[item.id] === letra;
+
+      return (
+        <TouchableOpacity
+          key={index}
+          style={[styles.radioOption, selecionada && styles.radioSelected]}
+          onPress={() => selecionarResposta(item.id, letra)}
+        >
+          <RadioButton
+            value={letra}
+            status={selecionada ? 'checked' : 'unchecked'}
+            onPress={() => selecionarResposta(item.id, letra)}
+            color="#2e7d32"
+          />
+          <Text style={styles.alternativaTexto}>
+            {`${letra}) ${texto}`}
+          </Text>
+        </TouchableOpacity>
+      );
+    });
 
   return (
     <LinearGradient
@@ -64,21 +63,25 @@ const FormularioProva = ({ route }) => {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <FlatList
           data={questoes}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.questaoCard}>
-              <Text style={styles.enunciado}>{item.numero}. {item.enunciado}</Text>
+              <Text style={styles.enunciado}>
+                {`Questão ${item.numero}: ${item.enunciado}`}
+              </Text>
               {renderAlternativas(item)}
             </View>
           )}
+          scrollEnabled={false}
         />
+
         <TouchableOpacity style={styles.botaoEnviar} onPress={enviarRespostas}>
           <Text style={styles.textoBotao}>Enviar Respostas</Text>
         </TouchableOpacity>
       </ScrollView>
     </LinearGradient>
   );
-};
+}
 
 const styles = StyleSheet.create({
   gradient: {
@@ -89,32 +92,36 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   questaoCard: {
-    backgroundColor: '#FFFFFF ',
+    backgroundColor: '#FFFFFF00',
     borderRadius: 12,
     padding: 16,
-    marginBottom: 12,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
   },
   enunciado: {
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: 10,
+    marginBottom: 12,
     color: '#fff',
   },
   alternativaTexto: {
-    fontSize: 14,
-    color: '#333',
+    fontSize: 15,
+    color: '#fff',
+    flexShrink: 1,
   },
   radioOption: {
-    padding: 10,
-    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF00',
     borderRadius: 8,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginVertical: 4,
+    padding: 10,
+    marginBottom: 6,
   },
   radioSelected: {
-    backgroundColor: '#c8e6c9',
-    borderColor: '#2e7d32',
+    backgroundColor: '#d0f0c0',
   },
   botaoEnviar: {
     marginTop: 20,
@@ -129,5 +136,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 });
-
-export default FormularioProva;

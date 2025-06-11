@@ -1,11 +1,15 @@
-// routes/questoes.js
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// Buscar questões de um ano específico
-router.get('/:ano', async (req, res) => {
-  const { ano } = req.params;
+// Buscar questões por ano com query ?ano=2024
+router.get('/', async (req, res) => {
+  const { ano } = req.query;
+
+  if (!ano) {
+    return res.status(400).json({ error: 'Ano é obrigatório como parâmetro na query (?ano=2024)' });
+  }
+
   try {
     const [rows] = await db.query(
       'SELECT id, numero, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e FROM questoes WHERE ano = ?',

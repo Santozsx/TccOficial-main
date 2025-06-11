@@ -5,12 +5,13 @@ const authRoutes = require('./routes/auth');
 const questoesRoutes = require('./routes/questoes');
 const respostasRoutes = require('./routes/respostas');
 
+
 app.use(cors());
 app.use(express.json());
 
 app.use('/auth', authRoutes);
-app.use('/api/questoes', questoesRoutes);      // <-- Nova rota
-app.use('/api/respostas', respostasRoutes);    // <-- Nova rota
+app.use('/questoes', questoesRoutes);      // <-- Nova rota
+app.use('/api/routes/respostas', respostasRoutes);    // <-- Nova rota
 
 const port = 8080;
 app.listen(port, () => {
