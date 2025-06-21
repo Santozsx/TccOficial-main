@@ -41,6 +41,7 @@ import NavegaCFP from "./screens/Certificados/GestaoNegocios/CFP/CFP";
 import NavegaPMP from "./screens/Certificados/GestaoNegocios/PMP/PMP";
 import navegaEnem2 from "./screens/Vestibular/enem/enem";
 import NavegaForm from "./screens/formularioprovas/FormularioProva";
+import ResultadoScreen from "./screens/ResultadoQuestoes/resultadoscreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -264,6 +265,13 @@ export default function StackRoutes() {
         name="FormularioProva"
         component={NavegaForm}
         options={{ headerShown: false }} />
+
+        <Stack.Screen 
+        name="Resultado" 
+        component={ResultadoScreen}
+        options={{ headerShown: false }} />
+
+
 
 
 
