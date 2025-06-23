@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
   try {
     const [rows] = await db.query(
-      'SELECT id, numero, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e FROM questoes WHERE ano = ?',
+      'SELECT id, numero, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e, resposta FROM questoes WHERE ano = ?',
       [ano]
     );
 
@@ -26,7 +26,8 @@ router.get('/', async (req, res) => {
         `C) ${q.alternativa_c}`,
         `D) ${q.alternativa_d}`,
         `E) ${q.alternativa_e}`
-      ]
+      ],
+      resposta:q.resposta
     }));
 
     res.json(questoes);
