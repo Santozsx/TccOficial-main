@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function ResultadoScreen({ route }) {
   const { totalQuestoes, acertos, erros, detalhes } = route.params;
 
   const porcentagem = ((acertos / totalQuestoes) * 100).toFixed(1);
+
+  const navigation = useNavigation();
+
+  function navegaEnem() {
+    navigation.navigate('NavegaEnem')
+  }
 
   return (
     <LinearGradient
@@ -38,6 +46,9 @@ export default function ResultadoScreen({ route }) {
           </View>
         )}
       />
+      <TouchableOpacity style={styles.botaoVoltar} onPress={() => navigation.navigate('NavegaEnem')}>
+        <Text style={styles.textoBotao}>🔙 Voltar para Seleção</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 }
@@ -54,6 +65,23 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
   },
+  botaoVoltar: {
+    backgroundColor: '#ffffff20',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
   resumo: {
     fontSize: 18,
     marginBottom: 4,

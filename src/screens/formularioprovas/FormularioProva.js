@@ -14,7 +14,7 @@ export default function QuestoesScreen() {
   useEffect(() => {
     const fetchQuestoes = async () => {
       try {
-        const response = await fetch('http://localhost:8080/questoes?ano=2024'); // Use IP real no celular
+        const response = await fetch('http://localhost:8080/questoes?ano=2025'); // Use IP real no celular
         const data = await response.json();
         setQuestoes(data);
       } catch (error) {

@@ -44,6 +44,7 @@ import NavegaForm from "./screens/formularioprovas/FormularioProva";
 import ResultadoScreen from "./screens/ResultadoQuestoes/resultadoscreen";
 
 
+
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
